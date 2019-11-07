@@ -1,0 +1,4 @@
+(
+  title: "GameJam1",
+  dimensions: Some((800, 600)),
+)
