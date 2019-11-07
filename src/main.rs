@@ -1,6 +1,7 @@
 #![warn(clippy::all)]
 use amethyst::prelude::*;
 use amethyst::winit::{Event, KeyboardInput, VirtualKeyCode, WindowEvent};
+use crate::pawn::*;
 
 struct GameState;
 
@@ -38,4 +39,13 @@ fn main() -> amethyst::Result<()> {
     // amethyst::start_logger();
     game.run();
     Ok(())
+}
+
+fn skill_level_test() {
+    let cook_skill = CookSkillTypes::Meat(5);
+    let server_skill = ServerSkillTypes::Balance(10);
+    cook_skill.add_xp(10);
+    server_skill.sub_xp(14);
+    assert_eq!(cook_skill.get_level(), 15);
+    assert_eq!(server_skill.get_level(), 6);
 }
