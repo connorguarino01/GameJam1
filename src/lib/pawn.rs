@@ -52,27 +52,27 @@ impl SkillLevel for CookSkillTypes {
     /// Adds an amount of xp to the specific variant of CookSkillTypes
     fn add_xp(&mut self, xp_gain:u8) {
         match self {
-            CookSkillTypes::Meat(mut cur_level) => cur_level += xp_gain,
-            CookSkillTypes::Vegetable(mut cur_level) => cur_level += xp_gain,
-            CookSkillTypes::Soup(mut cur_level) => cur_level += xp_gain,
-            CookSkillTypes::Baking(mut cur_level) => cur_level += xp_gain,
-            CookSkillTypes::Dessert(mut cur_level) => cur_level += xp_gain,
-            CookSkillTypes::Pasta(mut cur_level) => cur_level += xp_gain,
-            CookSkillTypes::Preserving(mut cur_level) => cur_level += xp_gain,
-            CookSkillTypes::Sandwich(mut cur_level) => cur_level += xp_gain,
+            CookSkillTypes::Meat(ref mut cur_level) => *cur_level += xp_gain,
+            CookSkillTypes::Vegetable(ref mut cur_level) => *cur_level += xp_gain,
+            CookSkillTypes::Soup(ref mut cur_level) => *cur_level += xp_gain,
+            CookSkillTypes::Baking(ref mut cur_level) => *cur_level += xp_gain,
+            CookSkillTypes::Dessert(ref mut cur_level) => *cur_level += xp_gain,
+            CookSkillTypes::Pasta(ref mut cur_level) => *cur_level += xp_gain,
+            CookSkillTypes::Preserving(ref mut cur_level) => *cur_level += xp_gain,
+            CookSkillTypes::Sandwich(ref mut cur_level) => *cur_level += xp_gain,
         }
     }
     /// Subtracts an amount of xp to the specific variant of CookSkillTypes
-    fn sub_xp(&mut self, xp_loss:u8) {
+    fn sub_xp(&mut self, xp_loss: u8) {
         match self {
-            CookSkillTypes::Meat(mut cur_level) => cur_level -= xp_loss,
-            CookSkillTypes::Vegetable(mut cur_level) => cur_level -= xp_loss,
-            CookSkillTypes::Soup(mut cur_level) => cur_level -= xp_loss,
-            CookSkillTypes::Baking(mut cur_level) => cur_level -= xp_loss,
-            CookSkillTypes::Dessert(mut cur_level) => cur_level -= xp_loss,
-            CookSkillTypes::Pasta(mut cur_level) => cur_level -= xp_loss,
-            CookSkillTypes::Preserving(mut cur_level) => cur_level -= xp_loss,
-            CookSkillTypes::Sandwich(mut cur_level) => cur_level -= xp_loss,
+            CookSkillTypes::Meat(ref mut cur_level) => *cur_level -= xp_loss,
+            CookSkillTypes::Vegetable(ref mut cur_level) => *cur_level -= xp_loss,
+            CookSkillTypes::Soup(ref mut cur_level) => *cur_level -= xp_loss,
+            CookSkillTypes::Baking(ref mut cur_level) => *cur_level -= xp_loss,
+            CookSkillTypes::Dessert(ref mut cur_level) => *cur_level -= xp_loss,
+            CookSkillTypes::Pasta(ref mut cur_level) => *cur_level -= xp_loss,
+            CookSkillTypes::Preserving(ref mut cur_level) => *cur_level -= xp_loss,
+            CookSkillTypes::Sandwich(ref mut cur_level) => *cur_level -= xp_loss,
         }
     }
     /// Returns the value of the specific variant of CookSkillTypes
@@ -94,17 +94,17 @@ impl SkillLevel for ServerSkillTypes {
     /// Adds an amount of xp to the specific variant of ServerSkillTypes
     fn add_xp(&mut self, xp_gain:u8) {
         match self {
-            ServerSkillTypes::Balance(mut cur_level) => cur_level += xp_gain,
-            ServerSkillTypes::Social(mut cur_level) => cur_level += xp_gain,
-            ServerSkillTypes::Hosting(mut cur_level) => cur_level += xp_gain
+            ServerSkillTypes::Balance(ref mut cur_level) => *cur_level += xp_gain,
+            ServerSkillTypes::Social(ref mut cur_level) => *cur_level += xp_gain,
+            ServerSkillTypes::Hosting(ref mut cur_level) => *cur_level += xp_gain
         }
     }
     /// Subtracts an amount of xp to the specific variant of ServerSkillTypes
     fn sub_xp(&mut self, xp_loss:u8) {
         match self {
-            ServerSkillTypes::Balance(mut cur_level) => cur_level -= xp_loss,
-            ServerSkillTypes::Social(mut cur_level) => cur_level -= xp_loss,
-            ServerSkillTypes::Hosting(mut cur_level) => cur_level -= xp_loss
+            ServerSkillTypes::Balance(ref mut cur_level) => *cur_level -= xp_loss,
+            ServerSkillTypes::Social(ref mut cur_level) => *cur_level -= xp_loss,
+            ServerSkillTypes::Hosting(ref mut cur_level) => *cur_level -= xp_loss
         }
     }
     /// Returns the value of the specific variant of ServerSkillTypes
