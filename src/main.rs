@@ -1,7 +1,6 @@
 #![warn(clippy::all)]
 use amethyst::prelude::*;
 use amethyst::winit::{Event, KeyboardInput, VirtualKeyCode, WindowEvent};
-use game_jam1_lib::pawn::*;
 
 struct GameState;
 
