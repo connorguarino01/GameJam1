@@ -1,21 +1,17 @@
-use amethyst::ecs::{Component, VecStorage};
+const SKILL_TYPES: [&str;2] = ["Meat", "Vegetable"];
 
 struct Skill {
+    skill_type: String,
     xp: u8,
     skill_level: u8,
 }
 
-enum SkillType {
-    Meat(Skill),
-    Vegetable(Skill),
-    Soup(Skill),
-    Baking(Skill),
-    Dessert(Skill),
-    Pasta(Skill),
-    Preserving(Skill),
-    Sandwich(Skill),
+struct Food {
+    food_name: String,
+    skills: Vec<Skill>,
 }
 
-impl Component for SkillType {
-    type Storage = VecStorage<Self>;
+impl Food {
+    fn create_food(food_name: String, skills: Vec<Skill>) -> Food {
+    }
 }

@@ -7,6 +7,7 @@ use amethyst::input::{InputBundle, StringBindings};
 mod systems;
 mod pong;
 use crate::pong::Pong;
+mod food;
 
 fn main() -> amethyst::Result<()> {
     let app_root = std::env::current_dir()?;
