@@ -1,41 +1,35 @@
 #![warn(clippy::all)]
 use amethyst::prelude::*;
-use amethyst::winit::{Event, KeyboardInput, VirtualKeyCode, WindowEvent};
+use amethyst::renderer::{ RenderingBundle, RenderToWindow, RenderFlat2D };
+use amethyst::renderer::rendy::vulkan::Backend;
+use amethyst::core::transform::TransformBundle;
 
-struct GameState;
-
-impl SimpleState for GameState {
-    fn on_start(&mut self, _: StateData<'_, GameData<'_, '_>>) {
-        println!("Starting game!");
-    }
-
-    fn handle_event(&mut self, _: StateData<'_, GameData<'_, '_>>, event: StateEvent) -> SimpleTrans {
-        if let StateEvent::Window(event) = &event {
-            match event {
-                 Event::WindowEvent { event, .. } => match event {
-                    WindowEvent::KeyboardInput {
-                        input: KeyboardInput { virtual_keycode: Some(VirtualKeyCode::Escape), .. }, ..
-                    } |
-                    WindowEvent::CloseRequested => Trans::Quit,
-                    _ => Trans::None,
-                },
-                _ => Trans::None,
-            }
-        } else {
-            Trans::None
-        }
-    }
-
-    fn update(&mut self, _: &mut StateData<'_, GameData<'_, '_>>) -> SimpleTrans {
-        println!("Computing some more whoop-ass...");
-        Trans::Quit
-    }
-}
+mod pong;
+use crate::pong::Pong;
 
 fn main() -> amethyst::Result<()> {
-    let assets_dir = "assets/";
-    let mut game = Application::new(assets_dir, GameState, GameDataBuilder::default())?;
-    // amethyst::start_logger();
+    let app_root = std::env::current_dir()?;
+    let display_config_path = app_root.join("config").join("display.ron");
+    
+    amethyst::start_logger(Default::default());
+
+    let game_data = GameDataBuilder::default()
+        .with_bundle(
+            RenderingBundle::<Backend>::new()
+                // The RenderToWindow plugin provides all the scaffolding for opening a window and drawing on it
+                .with_plugin(
+                    RenderToWindow::from_config_path(display_config_path)
+                        .with_clear([0.0, 0.0, 0.0, 1.0]),
+                )
+                // RenderFlat2D plugin is used to render entities with a `SpriteRender` component.
+                .with_plugin(RenderFlat2D::default()),
+        )?.with_bundle(
+            TransformBundle::new()
+        )?;
+
+    let assets_dir = app_root.join("assets");
+    let mut world = World::new();
+    let mut game = Application::new(assets_dir, Pong, game_data)?;
     game.run();
     Ok(())
 }
