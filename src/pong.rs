@@ -7,6 +7,8 @@ use amethyst::{
     ui::{Anchor, TtfFormat, UiText, UiTransform},
 };
 
+// use crate::food::{SkillList};
+
 pub const ARENA_HEIGHT: f32 = 100.0;
 pub const ARENA_WIDTH: f32 = 100.0;
 pub const PADDLE_HEIGHT: f32 = 16.0;
@@ -150,6 +152,12 @@ fn initialise_paddles(world: &mut World, sprite_sheet: Handle<SpriteSheet>) {
         .with(right_transform)
         .build();
 }
+
+// fn initialise_skill_list(world: &mut World) {
+//     world
+//     .create_entity()
+//     .with(SkillList::new(skill_list::TESTVEC))
+// }
 
 impl Component for Paddle {
     type Storage = DenseVecStorage<Self>;
