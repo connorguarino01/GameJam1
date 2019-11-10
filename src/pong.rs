@@ -27,7 +27,7 @@ impl SimpleState for Pong {
         let world = data.world;
 
         // Wait one second before spawning the ball.
-        self.ball_spawn_timer.replace(1.0);
+        self.ball_spawn_timer.replace(BALL_DELAY_TIME);
 
         // Load the spritesheet necessary to render the graphics.
         // `spritesheet` is the layout of the sprites on the image;
@@ -118,6 +118,9 @@ impl Paddle {
     }
 }
 
+impl Component for Paddle {
+    type Storage = DenseVecStorage<Self>;
+}
 
 /// Initialises one paddle on the left, and one paddle on the right.
 fn initialise_paddles(world: &mut World, sprite_sheet: Handle<SpriteSheet>) {
@@ -149,10 +152,6 @@ fn initialise_paddles(world: &mut World, sprite_sheet: Handle<SpriteSheet>) {
         .with(Paddle::new(Side::Right))
         .with(right_transform)
         .build();
-}
-
-impl Component for Paddle {
-    type Storage = DenseVecStorage<Self>;
 }
 
 // ******** BALL ******** //

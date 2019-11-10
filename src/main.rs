@@ -8,7 +8,7 @@ use amethyst::ui::{RenderUi, UiBundle};
 mod systems;
 mod pong;
 use crate::pong::Pong;
-mod food;
+// mod food;
 
 fn main() -> amethyst::Result<()> {
     let app_root = std::env::current_dir()?;
