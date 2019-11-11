@@ -156,8 +156,6 @@ fn initialise_paddles(world: &mut World, sprite_sheet: Handle<SpriteSheet>) {
         .build();
 }
 
-<<<<<<< HEAD
-=======
 // fn initialise_skill_list(world: &mut World) {
 //     world
 //     .create_entity()
@@ -168,7 +166,6 @@ impl Component for Paddle {
     type Storage = DenseVecStorage<Self>;
 }
 
->>>>>>> 890a70cf3529bfce27c9ced4a776454f427055d7
 // ******** BALL ******** //
 
 pub struct Ball {
