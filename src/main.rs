@@ -1,6 +1,5 @@
 #![warn(clippy::all)]
 use amethyst::{
-    { LoggerConfig, LogLevelFilter },
     prelude::*,
     renderer::{ RenderingBundle, RenderToWindow, RenderFlat2D, rendy::vulkan::Backend },
     core::transform::TransformBundle,

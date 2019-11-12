@@ -4,8 +4,7 @@ use amethyst::{
     ecs::prelude::{Component, DenseVecStorage, Entity},
     prelude::*,
     renderer::{Camera, ImageFormat, SpriteRender, SpriteSheet, SpriteSheetFormat, Texture},
-    ui::{Anchor, TtfFormat, UiText, UiTransform},
-    audio::AudioSink,
+    ui::{Anchor, TtfFormat, UiText, UiTransform}
 };
 
 use crate::audio::initialise_audio;

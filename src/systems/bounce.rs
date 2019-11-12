@@ -3,9 +3,8 @@ use std::ops::Deref;
 use amethyst::{
     assets::AssetStorage,
     audio::{ output::Output, Source },
-    core::{Transform, SystemDesc},
-    derive::SystemDesc,
-    ecs::prelude::{Join, ReadStorage, System, SystemData, World, WriteStorage, Read, ReadExpect},
+    core::{Transform},
+    ecs::prelude::{Join, ReadStorage, System, WriteStorage, Read, ReadExpect},
 };
 
 use crate::audio::{play_bounce_sound, Sounds};
@@ -14,6 +13,7 @@ use crate::pong::{Ball, Side, Paddle, ARENA_HEIGHT};
 pub struct BounceSystem;
 
 impl<'s> System<'s> for BounceSystem {
+    #[allow(clippy::type_complexity)]
     type SystemData = (
         WriteStorage<'s, Ball>,
         ReadStorage<'s, Paddle>,
@@ -56,14 +56,12 @@ impl<'s> System<'s> for BounceSystem {
                     paddle_x - ball.radius,
                     paddle_y - ball.radius,
                     paddle_x + paddle.width + ball.radius,
-                    paddle_y + paddle.height + ball.radius,
-                ) {
-                    if (paddle.side == Side::Left && ball.velocity[0] < 0.0)
-                        || (paddle.side == Side::Right && ball.velocity[0] > 0.0)
-                    {
-                        ball.velocity[0] = -ball.velocity[0];
-                        play_bounce_sound(&*sounds, &storage, audio_output.as_ref().map(|o| o.deref()));
-                    }
+                    paddle_y + paddle.height + ball.radius
+                ) && ((paddle.side == Side::Left && ball.velocity[0] < 0.0)
+                    || (paddle.side == Side::Right && ball.velocity[0] > 0.0))
+                {
+                    ball.velocity[0] = -ball.velocity[0];
+                    play_bounce_sound(&*sounds, &storage, audio_output.as_ref().map(|o| o.deref()));
                 }
             }
         }
