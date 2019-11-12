@@ -16,7 +16,7 @@ pub struct SkillList {
 }
 
 impl SkillList {
-    pub fn create_skill_list(skill_list: Vec<Skill>) -> SkillList {
+    pub fn new(skill_list: Vec<Skill>) -> SkillList {
         SkillList {
             skill_list,
         }
