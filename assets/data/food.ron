@@ -1,6 +1,7 @@
 #[derive(Clone, Copy, Component, Debug, Default, Deserialize, Serialize, PrefabData)]
 #[prefab(Component)]
 #![enable(implicit_some)]
+
 Prefab(
     entities: [
         PrefabEntity(
