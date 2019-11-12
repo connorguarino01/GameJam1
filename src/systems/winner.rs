@@ -17,6 +17,7 @@ use crate::audio::{ play_score_sound, Sounds };
 pub struct WinnerSystem;
 
 impl<'s> System<'s> for WinnerSystem {
+    #[allow(clippy::type_complexity)]
     type SystemData = (
         WriteStorage<'s, Ball>,
         WriteStorage<'s, Transform>,
