@@ -5,8 +5,10 @@ use amethyst::{
     prelude::*,
     renderer::{Camera, ImageFormat, SpriteRender, SpriteSheet, SpriteSheetFormat, Texture},
     ui::{Anchor, TtfFormat, UiText, UiTransform},
+    audio::AudioSink,
 };
 
+use crate::audio::initialise_audio;
 // use crate::food::{SkillList};
 
 pub const ARENA_HEIGHT: f32 = 100.0;
@@ -38,6 +40,7 @@ impl SimpleState for Pong {
         initialise_paddles(world, self.sprite_sheet_handle.clone().unwrap());
         initialise_camera(world);
         initialise_scoreboard(world);
+        initialise_audio(world);
     }
 
     fn update(&mut self, data: &mut StateData<'_, GameData<'_, '_>>) -> SimpleTrans {
@@ -156,19 +159,6 @@ fn initialise_paddles(world: &mut World, sprite_sheet: Handle<SpriteSheet>) {
         .build();
 }
 
-<<<<<<< HEAD
-=======
-// fn initialise_skill_list(world: &mut World) {
-//     world
-//     .create_entity()
-//     .with(SkillList::new(skill_list::TESTVEC))
-// }
-
-impl Component for Paddle {
-    type Storage = DenseVecStorage<Self>;
-}
-
->>>>>>> 890a70cf3529bfce27c9ced4a776454f427055d7
 // ******** BALL ******** //
 
 pub struct Ball {

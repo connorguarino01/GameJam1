@@ -1,21 +1,27 @@
 #![warn(clippy::all)]
-use amethyst::prelude::*;
-use amethyst::renderer::{ RenderingBundle, RenderToWindow, RenderFlat2D, rendy::vulkan::Backend };
-use amethyst::core::transform::TransformBundle;
-use amethyst::input::{InputBundle, StringBindings};
-use amethyst::ui::{RenderUi, UiBundle};
+use amethyst::{
+    { LoggerConfig, LogLevelFilter },
+    prelude::*,
+    renderer::{ RenderingBundle, RenderToWindow, RenderFlat2D, rendy::vulkan::Backend },
+    core::transform::TransformBundle,
+    input::{InputBundle, StringBindings},
+    ui::{RenderUi, UiBundle},
+    audio::{ AudioBundle, DjSystemDesc }
+};
 
 mod systems;
 mod pong;
 use crate::pong::Pong;
+mod audio;
+use audio::Music;
 // mod food;
+
 
 fn main() -> amethyst::Result<()> {
     let app_root = std::env::current_dir()?;
     let display_config_path = app_root.join("config").join("display.ron");
     
     amethyst::start_logger(Default::default());
-
     
     let binding_path = app_root.join("config").join("bindings.ron");
 
@@ -37,6 +43,12 @@ fn main() -> amethyst::Result<()> {
         .with_bundle(TransformBundle::new())?
         .with_bundle(input_bundle)?
         .with_bundle(UiBundle::<StringBindings>::new())?
+        .with_bundle(AudioBundle::default())?
+        .with_system_desc(
+            DjSystemDesc::new(|music: &mut Music| music.music.next()),
+            "dj_system",
+            &[],
+        )
         .with(systems::PaddleSystem, "paddle_system", &["input_system"])
         .with(systems::MoveBallsSystem, "ball_system", &[])
         .with(
