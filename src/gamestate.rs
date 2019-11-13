@@ -13,6 +13,7 @@ use amethyst::{
     window::ScreenDimensions,
 };
 
+use crate::pawn::{ Pawn, initialize_pawns };
 use crate::tile::WorldTile;
 
 #[derive(Default)]
@@ -22,15 +23,21 @@ impl SimpleState for GameState {
     fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
         let world = data.world;
 
+        world.register::<Pawn>();
+
         // Load in sprites
+        let pawn_sprite_sheet_handle =
+            load_sprite_sheet(world, "texture/pawns_spritesheet.png", "texture/pawns_spritesheet.ron");
         let map_sprite_sheet_handle =
-            load_sprite_sheet(world, "texture/cp437_20x20.png", "texture/cp437_20x20.ron");
+            load_sprite_sheet(world, "texture/map_spritesheet.png", "texture/map_spritesheet.ron");
 
         // Setup camera
         let (width, height) = {
             let dim = world.read_resource::<ScreenDimensions>();
             (dim.width(), dim.height())
         };
+        
+        let _player = initialize_pawns(world, &pawn_sprite_sheet_handle);
 
         let _camera = initialise_camera(
             world,
@@ -40,13 +47,13 @@ impl SimpleState for GameState {
 
          // Create a test debug lines entity
          let _ = world
-         .create_entity()
-         .with(DebugLinesComponent::with_capacity(1))
-         .build();
+            .create_entity()
+            .with(DebugLinesComponent::with_capacity(1))
+            .build();
 
         let map = TileMap::<WorldTile>::new(
-            Vector3::new(48, 48, 1),
-            Vector3::new(20, 20, 1),
+            Vector3::new(10, 10, 1),
+            Vector3::new(128, 128, 1),
             Some(map_sprite_sheet_handle),
         );
 

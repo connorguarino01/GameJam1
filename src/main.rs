@@ -9,6 +9,7 @@ use amethyst::{
 
 mod tile;
 mod gamestate;
+mod pawn;
 
 use tile::WorldTile;
 use gamestate::GameState;
