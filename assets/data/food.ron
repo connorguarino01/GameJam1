@@ -5,7 +5,10 @@
 Prefab(
     entities: [
         PrefabEntity(
-            data: Skill List(meat:5, vegetable:1)
+            data: Food(
+                name: "Hamburger",
+                skills: Vec<Skill> 
+            )
         )
     ]
 )

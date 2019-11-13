@@ -1,4 +1,4 @@
-use crate::skills::{SkillList}
+use crate::skills::{SkillList};
 
 pub struct Food {
     name: String,

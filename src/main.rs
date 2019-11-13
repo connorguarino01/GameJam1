@@ -13,7 +13,8 @@ mod pong;
 use crate::pong::Pong;
 mod audio;
 use audio::Music;
-// mod food;
+mod food;
+mod skills;
 
 
 fn main() -> amethyst::Result<()> {

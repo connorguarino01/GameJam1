@@ -1,26 +1,13 @@
 use amethyst::ecs::{Component, VecStorage};
 
 pub struct Skill {
-    skill_type: SkillType,
     xp: u8,
     skill_level: u8,
 }
 
-pub enum SkillType {
-    Meat,
-    Vegetable
-}
-
 pub struct SkillList {
-    skill_list: Vec<Skill>
-}
-
-impl SkillList {
-    pub fn new(skill_list: Vec<Skill>) -> SkillList {
-        SkillList {
-            skill_list,
-        }
-    }
+    meat: Option<Skill>,
+    vegetable: Option<Skill>
 }
 
 impl Component for SkillList {
