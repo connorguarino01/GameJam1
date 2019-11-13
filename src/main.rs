@@ -1,19 +1,17 @@
 #![warn(clippy::all)]
 use amethyst::{
     prelude::*,
-    renderer::{ RenderingBundle, RenderToWindow, RenderFlat2D, rendy::vulkan::Backend },
+    renderer::{ RenderingBundle, RenderToWindow, RenderFlat2D, rendy::vulkan::Backend, RenderDebugLines },
     core::transform::TransformBundle,
     input::{InputBundle, StringBindings},
-    ui::{RenderUi, UiBundle},
-    audio::{ AudioBundle, DjSystemDesc }
+    tiles::{ RenderTiles2D },
 };
 
-mod systems;
-mod pong;
-use crate::pong::Pong;
-mod audio;
-use audio::Music;
-// mod food;
+mod tile;
+mod gamestate;
+
+use tile::WorldTile;
+use gamestate::GameState;
 
 
 fn main() -> amethyst::Result<()> {
@@ -36,29 +34,15 @@ fn main() -> amethyst::Result<()> {
                         .with_clear([0.0, 0.0, 0.0, 1.0]),
                 )
                 // RenderFlat2D plugin is used to render entities with a `SpriteRender` component.
+                .with_plugin(RenderDebugLines::default())
                 .with_plugin(RenderFlat2D::default())
-                .with_plugin(RenderUi::default()),
+                .with_plugin(RenderTiles2D::<WorldTile>::default()),
         )?
         .with_bundle(TransformBundle::new())?
-        .with_bundle(input_bundle)?
-        .with_bundle(UiBundle::<StringBindings>::new())?
-        .with_bundle(AudioBundle::default())?
-        .with_system_desc(
-            DjSystemDesc::new(|music: &mut Music| music.music.next()),
-            "dj_system",
-            &[],
-        )
-        .with(systems::PaddleSystem, "paddle_system", &["input_system"])
-        .with(systems::MoveBallsSystem, "ball_system", &[])
-        .with(
-            systems::BounceSystem,
-            "collision_system",
-            &["paddle_system", "ball_system"]
-        )
-        .with(systems::WinnerSystem, "winner_system", &["ball_system"]);
+        .with_bundle(input_bundle)?;
 
     let assets_dir = app_root.join("assets");
-    let mut game = Application::new(assets_dir, Pong::default(), game_data)?;
+    let mut game = Application::new(assets_dir, GameState::default(), game_data)?;
     game.run();
     Ok(())
 }
