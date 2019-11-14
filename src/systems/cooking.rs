@@ -1,6 +1,13 @@
 use amethyst::ecs::System
+use crate::skill::Skill;
 
-struct Cooking
+struct Cooking;
+
+struct Food {
+    index: u8,
+    key: String,
+    skill_list: Vec<Skill>
+}
 
 impl<'a> System<'a> for Cooking {
     type SystemData = (
@@ -11,5 +18,6 @@ impl<'a> System<'a> for Cooking {
 
     fn run(&mut self, data: Self::SystemData) {
         println!("Hello!");
+        // let mut food = Vec<Skill> = Vec::new();
     }
 }

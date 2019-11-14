@@ -10,10 +10,10 @@ use amethyst::{
 mod tile;
 mod gamestate;
 mod pawn;
+mod bin;
 
 use tile::WorldTile;
 use gamestate::GameState;
-
 
 fn main() -> amethyst::Result<()> {
     let app_root = std::env::current_dir()?;
