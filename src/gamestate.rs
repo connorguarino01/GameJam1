@@ -32,13 +32,15 @@ impl SimpleState for GameState {
             load_sprite_sheet(world, "texture/map_spritesheet.png", "texture/map_spritesheet.ron");
 
         // Setup camera
-        let (width, height) = {
-            let dim = world.read_resource::<ScreenDimensions>();
-            (dim.width(), dim.height())
-        };
+        // let (width, height) = {
+        //     let dim = world.read_resource::<ScreenDimensions>();
+        //     (dim.width(), dim.height())
+        // };
         
         let _player = initialize_pawns(world, &pawn_sprite_sheet_handle);
 
+        let width = 128.0 * 20.0;
+        let height = 128.0 * 20.0;
         let _camera = initialise_camera(
             world,
             Transform::from(Vector3::new(0.0, 0.0, 1.1)),
