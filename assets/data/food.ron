@@ -1,14 +1,27 @@
-#[derive(Clone, Copy, Component, Debug, Default, Deserialize, Serialize, PrefabData)]
-#[prefab(Component)]
-#![enable(implicit_some)]
-
-Prefab(
-    entities: [
-        PrefabEntity(
-            data: Food(
-                name: "Hamburger",
-                skills: Vec<Skill> 
-            )
+Food(
+    index: 0,
+    key: "Hamburger",
+    skill_list: [
+        Skill(
+            skill_type: "Meat",
+            level: 5,
+            xp: 10
+        ),
+        Skill(
+            skill_type: "Vegetable",
+            level: 1,
+            xp: 5
+        )
+    ]
+),
+Food(
+    index: 1,
+    key: "Steak",
+    skill_list: [
+        Skill(
+            skill_type: "Meat",
+            level: 7,
+            xp: 20
         )
     ]
 )

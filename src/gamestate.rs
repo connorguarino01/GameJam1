@@ -1,6 +1,6 @@
 use amethyst::{
     prelude::*,
-    assets::{ Loader, AssetStorage },
+    assets::{ Loader, AssetStorage, RonFormat },
     core::{ Transform, math::Vector3 },
     ecs::Entity,
     renderer::{
@@ -15,6 +15,7 @@ use amethyst::{
 
 use crate::pawn::{ Pawn, initialize_pawns };
 use crate::tile::WorldTile;
+use crate::bin::food::{Food, FoodHandle};
 
 #[derive(Default)]
 pub struct GameState;
@@ -30,6 +31,10 @@ impl SimpleState for GameState {
             load_sprite_sheet(world, "texture/pawns_spritesheet.png", "texture/pawns_spritesheet.ron");
         let map_sprite_sheet_handle =
             load_sprite_sheet(world, "texture/map_spritesheet.png", "texture/map_spritesheet.ron");
+        
+        // Load in food
+        let food_handle=
+            load_food(world, "data/food.ron");
 
         // Setup camera
         // let (width, height) = {
@@ -92,6 +97,17 @@ fn load_sprite_sheet(world: &mut World, png_path: &str, ron_path: &str) -> Sprit
         SpriteSheetFormat(texture_handle),
         (),
         &sprite_sheet_store,
+    )
+}
+
+fn load_food(world: &mut World, ron_path: &str) -> FoodHandle {
+    let loader = world.read_resource::<Loader>();
+    let food_store = world.read_resource::<AssetStorage<Food>>();
+    loader.load(
+        ron_path,
+        RonFormat,
+        (),
+        &food_store,
     )
 }
 
