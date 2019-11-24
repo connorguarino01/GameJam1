@@ -11,7 +11,7 @@ mod tile;
 mod gamestate;
 mod pawn;
 mod foods;
-mod map;
+mod saves;
 
 use tile::WorldTile;
 use gamestate::GameState;

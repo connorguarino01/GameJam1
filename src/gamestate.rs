@@ -13,8 +13,8 @@ use amethyst::{
     window::ScreenDimensions,
 };
 
-use crate::pawn::{ Pawn, initialize_pawns };
-use crate::tile::WorldTile;
+use crate::saves::GameSave;
+use crate::pawn::Pawn;
 use crate::foods::food::{Food, FoodHandle};
 
 #[derive(Default)]
@@ -35,43 +35,14 @@ impl SimpleState for GameState {
         // Load in food
         let _food_handle =
             load_food(world, "data/food.ron");
-
-        // let _map_data_handle =
-        //     load_map_data(world, "data/world.ron");
-
-        // Setup camera
-        // let (width, height) = {
-        //     let dim = world.read_resource::<ScreenDimensions>();
-        //     (dim.width(), dim.height())
-        // };
         
-        let _player = initialize_pawns(world, &pawn_sprite_sheet_handle);
-
-        let width = 128.0 * 20.0;
-        let height = 128.0 * 20.0;
-        let _camera = initialise_camera(
-            world,
-            Transform::from(Vector3::new(0.0, 0.0, 1.1)),
-            Camera::standard_2d(width, height),
-        );
-
-         // Create a test debug lines entity
-         let _ = world
-            .create_entity()
-            .with(DebugLinesComponent::with_capacity(1))
-            .build();
-
-        let map = TileMap::<WorldTile>::new(
-            Vector3::new(10, 10, 1),
-            Vector3::new(128, 128, 1),
-            Some(map_sprite_sheet_handle),
-        );
-
-        let _map_entity = world
-            .create_entity()
-            .with(map)
-            .with(Transform::default())
-            .build();
+        let game_save =
+            load_gamesave(world, "data/save.ron");
+        game_save.load_camera(world);
+        game_save.load_map(world, map_sprite_sheet_handle.clone());
+        game_save.load_pawns(world, pawn_sprite_sheet_handle);
+        game_save.load_tile_map(world);
+        game_save.load_structures(world, map_sprite_sheet_handle); // TODO: Think about structures sprite locations
     }
 
     // fn on_stop(_data: StateData<'_, GameData<'_, '_>>) {
@@ -85,6 +56,10 @@ impl SimpleState for GameState {
     // fn on_pause(_data: StateData<'_, GameData<'_, '_>>) {
     //     let world = data.world;
     // }
+}
+
+fn load_gamesave(world: &mut World, ron_path: &str) -> GameSave {
+    unimplemented!();
 }
 
 fn load_sprite_sheet(world: &mut World, png_path: &str, ron_path: &str) -> SpriteSheetHandle {
@@ -112,13 +87,4 @@ fn load_food(world: &mut World, ron_path: &str) -> FoodHandle {
         (),
         &food_store,
     )
-}
-
-fn initialise_camera(world: &mut World, transform: Transform, camera: Camera) -> Entity {
-    world
-        .create_entity()
-        .with(camera)
-        .with(transform)
-        .named("camera")
-        .build()
 }
