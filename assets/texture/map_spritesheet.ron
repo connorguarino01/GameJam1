@@ -2,8 +2,16 @@
   texture_width: 128,
   texture_height: 128,
   sprites: [
+    // [0] -- Marble Floor
     (
       x: 0,
+      y: 0,
+      width: 128,
+      height: 128,
+    ),
+    // [1] -- Kitchen Door
+    (
+      x: 128,
       y: 0,
       width: 128,
       height: 128,
