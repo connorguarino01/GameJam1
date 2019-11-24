@@ -33,7 +33,7 @@ impl SimpleState for GameState {
             load_sprite_sheet(world, "texture/map_spritesheet.png", "texture/map_spritesheet.ron");
         
         // Load in food
-        let food_handle=
+        let food_handle =
             load_food(world, "data/food.ron");
 
         // Setup camera
