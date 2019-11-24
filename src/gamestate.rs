@@ -59,7 +59,7 @@ impl SimpleState for GameState {
     // }
 }
 
-fn load_gamesave(ron_path: &_) -> GameSave {
+fn load_gamesave(ron_path: &str) -> GameSave {
     let gamesave_data = std::fs::read(ron_path).expect("The game save file could not be read!");
     ron::de::from_bytes(&gamesave_data).expect("The game save file is corrupt!")
 }
