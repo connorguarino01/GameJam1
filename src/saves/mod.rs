@@ -18,7 +18,7 @@ use crate::pawn::Pawn;
 
 #[derive(Serialize, Deserialize)]
 pub struct IntermediateTile {
-    postiion: [u8; 3],
+    postion: [u8; 3],
     id: u8
 }
 
