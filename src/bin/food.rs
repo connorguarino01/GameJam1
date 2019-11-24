@@ -16,7 +16,7 @@ pub struct Food {
 pub type FoodHandle = Handle<Food>;
 
 impl Asset for Food {
-    const NAME: &'static str = "data::food::Food";
+    const NAME: &'static str = "bin::food::Food";
     type Data = Food;
     type HandleStorage = VecStorage<FoodHandle>;
 }
