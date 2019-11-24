@@ -1,4 +1,4 @@
-mod skill;
+pub mod skill;
 pub mod food;
 
 pub use self::skill::Skill;

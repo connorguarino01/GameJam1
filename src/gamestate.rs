@@ -15,7 +15,7 @@ use amethyst::{
 
 use crate::pawn::{ Pawn, initialize_pawns };
 use crate::tile::WorldTile;
-use crate::bin::food::{Food, FoodHandle};
+use crate::foods::food::{Food, FoodHandle};
 
 #[derive(Default)]
 pub struct GameState;

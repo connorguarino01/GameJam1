@@ -1,4 +1,4 @@
-use crate::bin::skill::{Skill};
+use crate::foods::Skill;
 use serde::{Deserialize, Serialize};
 use amethyst::{
     assets::{Handle, Asset, ProcessingState},

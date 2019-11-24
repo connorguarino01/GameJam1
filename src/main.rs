@@ -10,7 +10,7 @@ use amethyst::{
 mod tile;
 mod gamestate;
 mod pawn;
-mod bin;
+mod foods;
 
 use tile::WorldTile;
 use gamestate::GameState;
