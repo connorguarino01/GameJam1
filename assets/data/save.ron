@@ -4,11 +4,11 @@ tiles: [
         id: 0
     ),
     (
-        position: [0, 0, 0],
+        position: [0, 1, 0],
         id: 1
     ),
     (
-        position: [0, 0, 0],
+        position: [0, 2, 0],
         id: 2
     )
 ],
