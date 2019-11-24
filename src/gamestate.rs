@@ -26,6 +26,7 @@ impl SimpleState for GameState {
         let world = data.world;
 
         world.register::<Pawn>();
+        // world.register::<Food>();
 
         // Load in sprites
         let pawn_sprite_sheet_handle =
@@ -34,10 +35,10 @@ impl SimpleState for GameState {
             load_sprite_sheet(world, "texture/map_spritesheet.png", "texture/map_spritesheet.ron");
         
         // Load in food
-        let _food_handle =
-            load_food(world, "data/food.ron");
+        // let _food_handle =
+        //     load_food(world, "data/food.ron");
         
-        let game_save = load_gamesave("data/save.ron");
+        let game_save = load_gamesave("data/save.ron"); // TODO: Figure out how to path to "<assets_dir> + data/save.ron"
         game_save.load_camera(world);
         game_save.load_map(world, map_sprite_sheet_handle.clone());
         game_save.load_pawns(world, pawn_sprite_sheet_handle);
@@ -58,7 +59,7 @@ impl SimpleState for GameState {
     // }
 }
 
-fn load_gamesave(ron_path: &str) -> GameSave {
+fn load_gamesave(ron_path: &_) -> GameSave {
     let gamesave_data = std::fs::read(ron_path).expect("The game save file could not be read!");
     ron::de::from_bytes(&gamesave_data).expect("The game save file is corrupt!")
 }

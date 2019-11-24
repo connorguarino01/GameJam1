@@ -2,11 +2,11 @@ use crate::foods::Skill;
 use serde::{Deserialize, Serialize};
 use amethyst::{
     assets::{Handle, Asset, ProcessingState},
-    ecs::VecStorage,
+    ecs::{ VecStorage, Component, DenseVecStorage },
     Error
 };
 
-#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize, Component)]
 pub struct Food {
     pub index: u8,
     pub key: String,
