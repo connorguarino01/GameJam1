@@ -6,9 +6,16 @@ use amethyst::{
 };
 
 #[derive(Default, Clone)]
-pub struct WorldTile;
+pub enum WorldTile {
+    Door = 0,
+    Wall = 1,
+    Floor = 2,
+}
 impl Tile for WorldTile {
-    fn sprite(&self, coordinates: Point3<u32>, _world: &World) -> Option<usize> {
+    fn sprite(&self, coordinates: Point3<u32>, world: &World) -> Option<usize> {
+        // let map_data = world.read_resource::<MapData>();
+
+
         // Get X coordinate
         if coordinates.to_homogeneous()[0] % 2 == 0 {
             Some(0)
