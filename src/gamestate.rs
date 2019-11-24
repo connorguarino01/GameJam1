@@ -12,6 +12,7 @@ use amethyst::{
     tiles::TileMap,
     window::ScreenDimensions,
 };
+use ron;
 
 use crate::saves::GameSave;
 use crate::pawn::Pawn;
@@ -36,8 +37,7 @@ impl SimpleState for GameState {
         let _food_handle =
             load_food(world, "data/food.ron");
         
-        let game_save =
-            load_gamesave(world, "data/save.ron");
+        let game_save = load_gamesave("data/save.ron");
         game_save.load_camera(world);
         game_save.load_map(world, map_sprite_sheet_handle.clone());
         game_save.load_pawns(world, pawn_sprite_sheet_handle);
@@ -58,8 +58,9 @@ impl SimpleState for GameState {
     // }
 }
 
-fn load_gamesave(world: &mut World, ron_path: &str) -> GameSave {
-    unimplemented!();
+fn load_gamesave(ron_path: &str) -> GameSave {
+    let gamesave_data = std::fs::read(ron_path).expect("The game save file could not be read!");
+    ron::de::from_bytes(&gamesave_data).expect("The game save file is corrupt!")
 }
 
 fn load_sprite_sheet(world: &mut World, png_path: &str, ron_path: &str) -> SpriteSheetHandle {

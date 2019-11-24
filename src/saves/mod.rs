@@ -12,15 +12,17 @@ use amethyst::{
         Camera, Transparent
     }
 };
+use serde::{ Serialize, Deserialize };
 use crate::tile::WorldTile;
 use crate::pawn::Pawn;
 
+#[derive(Serialize, Deserialize)]
 pub struct IntermediateTile {
     postiion: [u8; 3],
     id: u8
 }
 
-#[derive(Clone)]
+#[derive(Clone, Serialize, Deserialize)]
 pub struct IntermediatePawn {
     position: [f32; 3],
     job: String,
@@ -28,10 +30,12 @@ pub struct IntermediatePawn {
     skills: Vec<String>
 }
 
+#[derive(Serialize, Deserialize)]
 pub struct IntermediateStructure {
 
 }
 
+#[derive(Serialize, Deserialize)]
 pub struct IntermediateMap {
     map_height: u32,
     map_width: u32,
@@ -40,6 +44,7 @@ pub struct IntermediateMap {
 }
 
 /// This is the structured form of the file the game loads and saves to.
+#[derive(Serialize, Deserialize)]
 pub struct GameSave {
     tiles: Vec<IntermediateTile>,
     pawns: Vec<IntermediatePawn>,
@@ -87,7 +92,7 @@ impl GameSave {
             .build();
         let map = TileMap::<WorldTile>::new(
             Vector3::new(self.map.map_width, self.map.map_height, 1),
-            Vector3::new(self.map.map_width, self.map.tile_height, 1),
+            Vector3::new(self.map.tile_width, self.map.tile_height, 1),
             Some(map_sprite_sheet_handle),
         );
 
